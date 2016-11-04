@@ -1,0 +1,27 @@
+{
+  "name": "elm-snake",
+  "version": "1.0.0",
+  "description": "Snake in Elm",
+  "main": "src/app.js",
+  "author": "Goh Jia Hao <jiahaog@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "elm": "^0.17.1",
+    "elm-hot-loader": "^0.3.4",
+    "elm-webpack-loader": "^3.0.6",
+    "html-webpack-plugin": "^2.24.1",
+    "rimraf": "^2.5.4",
+    "webpack": "2.1.0-beta.25",
+    "webpack-dev-server": "2.1.0-beta.9"
+  },
+  "scripts": {
+    "clean": "rimraf dist",
+    "build:prod": "webpack -p",
+    "start": "webpack-dev-server --inline --hot"
+  },
+  "dependencies": {},
+  "repository": {
+    "url": "git@github.com:jiahaog/elm-snake.git",
+    "type": "git"
+  }
+}
