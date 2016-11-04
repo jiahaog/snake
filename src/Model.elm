@@ -17,12 +17,12 @@ type alias Model =
 
 rows : Int
 rows =
-    5
+    50
 
 
 columns : Int
 columns =
-    5
+    50
 
 
 createRows : Int -> List Bool

@@ -20,6 +20,10 @@ module.exports = {
       {
         test: /\.elm$/,
         use: ['elm-hot', 'elm-webpack'],
+      },
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
       }
     ],
   },

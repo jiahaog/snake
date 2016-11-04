@@ -6,11 +6,13 @@
   "author": "Goh Jia Hao <jiahaog@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "css-loader": "^0.25.0",
     "elm": "^0.17.1",
     "elm-hot-loader": "^0.3.4",
     "elm-webpack-loader": "^3.0.6",
     "html-webpack-plugin": "^2.24.1",
     "rimraf": "^2.5.4",
+    "style-loader": "^0.13.1",
     "webpack": "2.1.0-beta.25",
     "webpack-dev-server": "2.1.0-beta.9"
   },
