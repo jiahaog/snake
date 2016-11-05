@@ -1,12 +1,13 @@
 module Models.Store exposing (Store, init, Grid)
 
 import Models.Snake exposing (Snake)
+import Models.Grid exposing (GridObject(Empty))
 import Actions exposing (Msg)
 import Config exposing (config)
 
 
 type alias Grid =
-    List (List Bool)
+    List (List GridObject)
 
 
 type alias Store =
@@ -15,14 +16,14 @@ type alias Store =
     }
 
 
-createRows : Int -> List Bool
+createRows : Int -> List GridObject
 createRows columns =
     1
         |> List.repeat columns
-        |> List.map (\n -> False)
+        |> List.map (\n -> Empty)
 
 
-createGrid : Int -> Int -> List (List Bool)
+createGrid : Int -> Int -> List (List GridObject)
 createGrid rows columns =
     List.map (\n -> createRows columns) [1..rows]
 

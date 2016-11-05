@@ -25,9 +25,15 @@
   display: flex;
   width: 15px;
   height: 15px;
+}
+
+.cell-empty {
   background-color: grey;
 }
 
-.active {
+.cell-snake {
+  background-color: green;
+}
+.cell-food {
   background-color: red;
 }

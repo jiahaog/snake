@@ -5,8 +5,8 @@ import Html.Attributes exposing (value, classList)
 import Html.Events exposing (onClick, onInput, on, keyCode)
 import Models.Store exposing (Store, Grid)
 import Actions exposing (Msg(..))
-import Components.Events exposing (onEnter)
 import Components.Debugger exposing (debuggerView)
+import Models.Grid exposing (GridObject(..))
 
 
 view : Store -> Html Msg
@@ -24,14 +24,27 @@ renderGrid grid =
     div [ classList [ ( "grid", True ) ] ] (List.map renderRow grid)
 
 
-renderRow : List Bool -> Html Msg
+renderRow : List GridObject -> Html Msg
 renderRow row =
     div [ classList [ ( "grid-row", True ) ] ] (List.map (\n -> renderCell n) row)
 
 
-renderCell : Bool -> Html Msg
-renderCell cellValue =
-    span [ classList [ ( "grid-cell", True ), ( "active", cellValue ) ] ] []
+renderCell : GridObject -> Html Msg
+renderCell gridObject =
+    span [ classList [ ( "grid-cell", True ), ( gridCellClass gridObject, True ) ] ] []
+
+
+gridCellClass : GridObject -> String
+gridCellClass gridObject =
+    case gridObject of
+        Empty ->
+            "cell-empty"
+
+        SnakeCell ->
+            "cell-snake"
+
+        Food ->
+            "cell-food"
 
 
 renderButtons : Html Msg
