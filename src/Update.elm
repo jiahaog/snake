@@ -1,7 +1,8 @@
 module Update exposing (update)
 
 import Models.Store exposing (Store)
-import Models.Snake exposing (initSnake)
+import Models.Snake exposing (newSnake)
+import Models.Geometry exposing (Direction(..), randomSnakeInitCoordinate)
 import Actions exposing (Msg(..))
 import Random
 
@@ -13,7 +14,7 @@ update msg store =
             ( store, Cmd.none )
 
         StartGame ->
-            ( store, Random.generate GenerateSnake initSnake )
+            ( store, (Random.generate GenerateSnake randomSnakeInitCoordinate) )
 
-        GenerateSnake snake ->
-            ( { store | snake = snake }, Cmd.none )
+        GenerateSnake coordinate ->
+            ( { store | snake = newSnake coordinate Down }, Cmd.none )

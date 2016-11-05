@@ -1,21 +1,30 @@
-module Models.Snake exposing (Snake, initSnake)
+module Models.Snake exposing (Snake, newSnake)
 
 import Random exposing (Generator)
 import Config exposing (config)
+import Models.Geometry exposing (Coordinate, Direction, coordinateAbove)
 
 
 type alias Snake =
-    List (List Int)
+    List Coordinate
 
 
-initSnakeWithParams : Int -> Generator Snake
-initSnakeWithParams columnSize =
-    columnSize
-        |> Random.int 0
-        |> Random.list config.dimensions
-        |> Random.list config.initialSnakeLength
+newSnake : Coordinate -> Direction -> Snake
+newSnake head direction =
+    growSnake [ head ] direction
 
 
-initSnake : Generator Snake
-initSnake =
-    initSnakeWithParams config.xSize
+maybeGrowSnake : Snake -> (Coordinate -> Coordinate) -> Maybe Coordinate -> Snake
+maybeGrowSnake snake whereToPut maybeHead =
+    case maybeHead of
+        Just head ->
+            (::) (whereToPut head) snake
+
+        Nothing ->
+            []
+
+
+growSnake : Snake -> Direction -> Snake
+growSnake snake direction =
+    List.head snake
+        |> maybeGrowSnake snake coordinateAbove
