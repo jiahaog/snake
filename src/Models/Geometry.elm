@@ -1,4 +1,4 @@
-module Models.Geometry exposing (Coordinate, Direction(..), randomSnakeInitCoordinate, coordinateOffset)
+module Models.Geometry exposing (Coordinate, Direction(..), randomSnakeInitCoordinate, randomDirection, coordinateOffset)
 
 import Random
 import Config exposing (config)
@@ -30,6 +30,26 @@ randomSnakeInitCoordinate =
 randomCoordinate : Random.Generator Coordinate
 randomCoordinate =
     randomCoordinateOffset 0
+
+
+randomDirection : Random.Generator Direction
+randomDirection =
+    Random.map
+        (\n ->
+            case n of
+                0 ->
+                    Up
+
+                1 ->
+                    Right
+
+                2 ->
+                    Down
+
+                _ ->
+                    Left
+        )
+        (Random.int 0 3)
 
 
 coordinateUp : Coordinate -> Coordinate
