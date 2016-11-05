@@ -1,4 +1,4 @@
-module Models.Geometry exposing (Coordinate, Direction(..), randomSnakeInitCoordinate, randomDirection, coordinateOffset)
+module Models.Geometry exposing (Coordinate, Direction(..), randomDirection, randomCoordinateOffset, coordinateOffset)
 
 import Random
 import Config exposing (config)
@@ -20,11 +20,6 @@ randomCoordinateOffset offset =
     config.xSize
         |> Random.int offset
         |> Random.list config.dimensions
-
-
-randomSnakeInitCoordinate : Random.Generator Coordinate
-randomSnakeInitCoordinate =
-    randomCoordinateOffset config.initialSnakeLength
 
 
 randomCoordinate : Random.Generator Coordinate

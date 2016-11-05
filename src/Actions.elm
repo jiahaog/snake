@@ -1,9 +1,9 @@
 module Actions exposing (Msg(..))
 
-import Models.Geometry exposing (Coordinate, Direction)
+import Models.Snake exposing (SnakeInitData)
 
 
 type Msg
     = Default
     | StartGame
-    | GenerateSnake ( Coordinate, Direction )
+    | GenerateSnake SnakeInitData

@@ -1,12 +1,26 @@
-module Models.Snake exposing (Snake, newSnake)
+module Models.Snake exposing (Snake, SnakeInitData, newSnake, snakeInitGenerator)
 
 import Random exposing (Generator)
 import Config exposing (config)
-import Models.Geometry exposing (Coordinate, Direction, coordinateOffset)
+import Models.Geometry exposing (Coordinate, Direction, coordinateOffset, randomCoordinateOffset, randomDirection)
 
 
 type alias Snake =
     List Coordinate
+
+
+type alias SnakeInitData =
+    ( Coordinate, Direction )
+
+
+randomSnakeInitCoordinate : Random.Generator Coordinate
+randomSnakeInitCoordinate =
+    randomCoordinateOffset config.initialSnakeLength
+
+
+snakeInitGenerator : Generator SnakeInitData
+snakeInitGenerator =
+    Random.map2 (,) randomSnakeInitCoordinate randomDirection
 
 
 newSnake : Coordinate -> Direction -> Snake
