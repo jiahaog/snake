@@ -1,4 +1,4 @@
-module Models.Geometry exposing (Coordinate, Direction(..), randomSnakeInitCoordinate, coordinateAbove)
+module Models.Geometry exposing (Coordinate, Direction(..), randomSnakeInitCoordinate, coordinateOffset)
 
 import Random
 import Config exposing (config)
@@ -32,8 +32,8 @@ randomCoordinate =
     randomCoordinateOffset 0
 
 
-coordinateAbove : Coordinate -> Coordinate
-coordinateAbove coordinate =
+coordinateUp : Coordinate -> Coordinate
+coordinateUp coordinate =
     List.indexedMap
         (\index value ->
             if index == 1 then
@@ -42,3 +42,55 @@ coordinateAbove coordinate =
                 value
         )
         coordinate
+
+
+coordinateRight : Coordinate -> Coordinate
+coordinateRight coordinate =
+    List.indexedMap
+        (\index value ->
+            if index == 0 then
+                value + 1
+            else
+                value
+        )
+        coordinate
+
+
+coordinateDown : Coordinate -> Coordinate
+coordinateDown coordinate =
+    List.indexedMap
+        (\index value ->
+            if index == 1 then
+                value - 1
+            else
+                value
+        )
+        coordinate
+
+
+coordinateLeft : Coordinate -> Coordinate
+coordinateLeft coordinate =
+    List.indexedMap
+        (\index value ->
+            if index == 0 then
+                value - 1
+            else
+                value
+        )
+        coordinate
+
+
+coordinateOffset : Direction -> (Coordinate -> Coordinate)
+coordinateOffset direction =
+    case direction of
+        Up ->
+            coordinateUp
+
+        Right ->
+            coordinateRight
+
+        Down ->
+            coordinateDown
+
+        Left ->
+            coordinateLeft
