@@ -1,13 +1,9 @@
-module Models.Store exposing (Store, init, Grid)
+module Models.Store exposing (Store, init)
 
 import Models.Snake exposing (Snake)
-import Models.Grid exposing (GridObject(Empty))
+import Models.Grid exposing (Grid, GridObject(Empty))
 import Actions exposing (Msg)
 import Config exposing (config)
-
-
-type alias Grid =
-    List (List GridObject)
 
 
 type alias Store =

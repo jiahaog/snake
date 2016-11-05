@@ -17,7 +17,14 @@ type Direction
 
 randomCoordinateOffset : Int -> Random.Generator Coordinate
 randomCoordinateOffset offset =
-    config.xSize
+    (config.xSize
+        -- first subtract 1 because Random.int is inclusive
+        -
+            1
+        -- Then subtract the initial snake length away (excluding the head)
+        -
+            (config.initialSnakeLength - 1)
+    )
         |> Random.int offset
         |> Random.list config.dimensions
 

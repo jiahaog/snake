@@ -15,7 +15,7 @@ type alias SnakeInitData =
 
 randomSnakeInitCoordinate : Random.Generator Coordinate
 randomSnakeInitCoordinate =
-    randomCoordinateOffset config.initialSnakeLength
+    randomCoordinateOffset (config.initialSnakeLength - 1)
 
 
 snakeInitGenerator : Generator SnakeInitData
