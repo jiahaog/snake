@@ -3,12 +3,12 @@ module Components.View exposing (..)
 import Html exposing (Html, div, span, button, text, input, select, option, Attribute)
 import Html.Attributes exposing (value, classList)
 import Html.Events exposing (onClick, onInput, on, keyCode)
-import Model exposing (Model, Grid)
-import Update exposing (Msg(..))
+import Models.Store exposing (Store, Grid)
+import Actions exposing (Msg(..))
 import Components.Events exposing (onEnter)
 
 
-view : Model -> Html Msg
+view : Store -> Html Msg
 view model =
     div []
         [ text "Elm Snake"

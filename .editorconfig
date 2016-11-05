@@ -15,6 +15,11 @@ charset = utf-8
 indent_style = space
 indent_size = 2
 
+[*.{py,elm}]
+charset = utf-8
+indent_style = space
+indent_size = 4
+
 # 2 space indentation
 [*.{html,css,less,scss,yml,json}]
 indent_style = space

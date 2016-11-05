@@ -1,10 +1,9 @@
 module Components.Events exposing (onEnter)
 
-import Update exposing (Msg)
 import Html exposing (Attribute)
 import Html.Events exposing (on, keyCode)
 import Json.Decode as Json
-import Update exposing (Msg(..))
+import Actions exposing (Msg(..))
 
 
 onEnter : Msg -> Attribute Msg

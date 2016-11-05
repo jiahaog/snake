@@ -1,15 +1,14 @@
-module Model exposing (Model, model, Grid)
+module Models.Store exposing (Store, init, Grid)
 
-
-type alias Snake =
-    List (List Int)
+import Models.Snake exposing (Snake)
+import Actions exposing (Msg)
 
 
 type alias Grid =
     List (List Bool)
 
 
-type alias Model =
+type alias Store =
     { snake : Snake
     , grid : Grid
     }
@@ -28,8 +27,8 @@ columns =
 createRows : Int -> List Bool
 createRows columns =
     1
-    |> List.repeat columns
-    |> List.map (\n -> False)
+        |> List.repeat columns
+        |> List.map (\n -> False)
 
 
 createGrid : Int -> Int -> List (List Bool)
@@ -37,8 +36,13 @@ createGrid rows columns =
     List.map (\n -> createRows columns) [1..rows]
 
 
-model : Model
-model =
+store : Store
+store =
     { snake = [ [ 1, 2 ] ]
     , grid = createGrid rows columns
     }
+
+
+init : ( Store, Cmd Msg )
+init =
+    ( store, Cmd.none )

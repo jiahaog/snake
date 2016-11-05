@@ -1,14 +1,14 @@
-module Update exposing (Msg(..), update)
+module Update exposing (update)
 
-import Model exposing (Model)
-
-
-type Msg
-    = Default
+import Models.Store exposing (Store)
+import Actions exposing (Msg(..))
 
 
-update : Msg -> Model -> Model
-update msg model =
+update : Msg -> Store -> ( Store, Cmd Msg )
+update msg store =
     case msg of
         Default ->
-            model
+            ( store, Cmd.none )
+
+        CreateSnake snake ->
+            ( { store | snake = snake }, Cmd.none )
