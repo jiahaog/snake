@@ -1,4 +1,4 @@
-module Models.Snake exposing (Snake, SnakeInitData, newSnake, snakeInitGenerator)
+module Models.Snake exposing (Snake, SnakeInitData, newSnake, snakeInitGenerator, moveSnake)
 
 import Random exposing (Generator)
 import Config exposing (config)

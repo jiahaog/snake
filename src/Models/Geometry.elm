@@ -105,14 +105,15 @@ coordinateLeft coordinate =
 coordinateOffset : Direction -> (Coordinate -> Coordinate)
 coordinateOffset direction =
     case direction of
+        -- Up and Down coordinate functions are swapped because the y axis goes downwards
         Up ->
-            coordinateUp
+            coordinateDown
 
         Right ->
             coordinateRight
 
         Down ->
-            coordinateDown
+            coordinateUp
 
         Left ->
             coordinateLeft
