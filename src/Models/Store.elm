@@ -2,6 +2,7 @@ module Models.Store exposing (Store, init, Grid)
 
 import Models.Snake exposing (Snake)
 import Actions exposing (Msg)
+import Config exposing (config)
 
 
 type alias Grid =
@@ -12,16 +13,6 @@ type alias Store =
     { snake : Snake
     , grid : Grid
     }
-
-
-rows : Int
-rows =
-    50
-
-
-columns : Int
-columns =
-    50
 
 
 createRows : Int -> List Bool
@@ -39,7 +30,7 @@ createGrid rows columns =
 store : Store
 store =
     { snake = [ [ 1, 2 ] ]
-    , grid = createGrid rows columns
+    , grid = createGrid config.xSize config.ySize
     }
 
 
