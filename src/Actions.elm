@@ -5,4 +5,5 @@ import Models.Snake exposing (Snake)
 
 type Msg
     = Default
-    | CreateSnake Snake
+    | StartGame
+    | GenerateSnake Snake

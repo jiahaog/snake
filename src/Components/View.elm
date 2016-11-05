@@ -6,6 +6,7 @@ import Html.Events exposing (onClick, onInput, on, keyCode)
 import Models.Store exposing (Store, Grid)
 import Actions exposing (Msg(..))
 import Components.Events exposing (onEnter)
+import Components.Debugger exposing (debuggerView)
 
 
 view : Store -> Html Msg
@@ -13,6 +14,8 @@ view model =
     div []
         [ text "Elm Snake"
         , div [ classList [ ( "grid-container", True ) ] ] [ renderGrid model.grid ]
+        , renderButtons
+        , debuggerView model
         ]
 
 
@@ -29,3 +32,10 @@ renderRow row =
 renderCell : Bool -> Html Msg
 renderCell cellValue =
     span [ classList [ ( "grid-cell", True ), ( "active", cellValue ) ] ] []
+
+
+renderButtons : Html Msg
+renderButtons =
+    div []
+        [ button [ onClick StartGame ] [ text "Create Snake" ]
+        ]
