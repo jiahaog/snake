@@ -41,13 +41,13 @@ update message store =
                 (\store snake food ->
                     let
                         ( snake, cmd ) =
-                            moveSnake store.lastDirection food snake
+                            moveSnake store.currentDirection food snake
                     in
-                        ( { store | snake = Just snake, grid = updateGrid snake food store.grid }, cmd )
+                        ( { store | snake = Just snake, grid = updateGrid snake food store.grid, lastMovedDirection = store.currentDirection }, cmd )
                 )
 
         NewDirection direction ->
-            ( { store | lastDirection = preventBackwardsDirection store.lastDirection direction }, Cmd.none )
+            ( { store | currentDirection = preventBackwardsDirection store.lastMovedDirection direction }, Cmd.none )
 
         GameOver ->
             ( { store | gameState = StateGameOver }, Cmd.none )

@@ -13,7 +13,8 @@ type alias Store =
     { snake : Maybe Snake
     , grid : Grid
     , food : Maybe Food
-    , lastDirection : Direction
+    , currentDirection : Direction
+    , lastMovedDirection : Direction
     , score : Int
     , gameState : GameState
     }
@@ -36,7 +37,8 @@ initialStore =
     { snake = Maybe.Nothing
     , grid = createGrid Config.xSize Config.ySize
     , food = Maybe.Nothing
-    , lastDirection = Right
+    , currentDirection = Right
+    , lastMovedDirection = Right
     , score = -1
     , gameState = StateGameWaiting
     }
