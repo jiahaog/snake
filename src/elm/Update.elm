@@ -6,7 +6,7 @@ import Actions.GenerateSnake exposing (generateSnake)
 import Models.Direction exposing (preventBackwardsDirection)
 import Models.Grid exposing (updateGrid, foodOverlapsSnake)
 import Models.Snake exposing (newSnake, moveSnake)
-import Models.Store exposing (Store)
+import Models.Store exposing (Store, initialStore)
 
 
 update : Message -> Store -> ( Store, Cmd Message )
@@ -15,8 +15,8 @@ update message store =
         Default ->
             ( store, Cmd.none )
 
-        StartGame ->
-            ( store, generateSnake )
+        NewGame ->
+            ( initialStore, generateSnake )
 
         GenerateSnake ( coordinate, direction ) ->
             let
@@ -29,7 +29,7 @@ update message store =
             if foodOverlapsSnake store.snake food then
                 ( store, generateFood )
             else
-                ( { store | food = food, grid = updateGrid store.grid store.snake food }, Cmd.none )
+                ( { store | food = food, grid = updateGrid store.grid store.snake food, score = store.score + 1 }, Cmd.none )
 
         TimeStep ->
             let

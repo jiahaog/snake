@@ -7,7 +7,7 @@ import Models.Geometry exposing (Coordinate)
 
 type Message
     = Default
-    | StartGame
+    | NewGame
     | GenerateSnake ( Coordinate, Direction )
     | GenerateFood Food
     | TimeStep

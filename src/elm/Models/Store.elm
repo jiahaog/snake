@@ -1,4 +1,4 @@
-module Models.Store exposing (Store, init)
+module Models.Store exposing (Store, initialStore, appStoreInit)
 
 import Actions.Message exposing (Message)
 import Config
@@ -13,6 +13,7 @@ type alias Store =
     , grid : Grid
     , food : Food
     , lastDirection : Direction
+    , score : Int
     }
 
 
@@ -28,15 +29,16 @@ createGrid rows columns =
     List.map (\n -> createRows columns) [1..rows]
 
 
-store : Store
-store =
-    { snake = [ [ 1, 2 ] ]
+initialStore : Store
+initialStore =
+    { snake = []
     , grid = createGrid Config.xSize Config.ySize
     , food = []
     , lastDirection = Right
+    , score = -1
     }
 
 
-init : ( Store, Cmd Message )
-init =
-    ( store, Cmd.none )
+appStoreInit : ( Store, Cmd Message )
+appStoreInit =
+    ( initialStore, Cmd.none )

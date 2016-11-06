@@ -50,6 +50,6 @@ gridCellClass gridObject =
 renderButtons : Html Message
 renderButtons =
     div []
-        [ button [ onClick StartGame ] [ text "Start Game" ]
+        [ button [ onClick NewGame ] [ text "New Game" ]
         , button [ onClick (TimeStep) ] [ text "TimeStep" ]
         ]

@@ -31,4 +31,4 @@ initialSnakeLength =
 
 timeInterval : Time
 timeInterval =
-    500
+    200
