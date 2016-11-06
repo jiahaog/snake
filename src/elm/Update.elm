@@ -1,16 +1,16 @@
 module Update exposing (update)
 
-import Random
-import Actions exposing (Msg(..), generateFood, generateSnake)
+import Actions.Message exposing (Message(..))
+import Actions exposing (generateFood, generateSnake)
 import Models.Direction exposing (preventBackwardsDirection)
 import Models.Grid exposing (updateGrid, foodOverlapsSnake)
 import Models.Snake exposing (newSnake, moveSnake)
 import Models.Store exposing (Store)
 
 
-update : Msg -> Store -> ( Store, Cmd Msg )
-update msg store =
-    case msg of
+update : Message -> Store -> ( Store, Cmd Message )
+update message store =
+    case message of
         Default ->
             ( store, Cmd.none )
 

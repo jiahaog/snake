@@ -4,13 +4,13 @@ import Char
 import Keyboard
 import Platform.Sub
 import Time
-import Actions exposing (Msg(TimeStep, NewDirection, Default))
+import Actions.Message exposing (Message(TimeStep, NewDirection, Default))
 import Config
 import Models.Direction exposing (Direction(..))
 import Models.Store exposing (Store)
 
 
-subscriptions : Store -> Sub Msg
+subscriptions : Store -> Sub Message
 subscriptions model =
     Platform.Sub.batch
         [ timeStepSubscription
@@ -18,7 +18,7 @@ subscriptions model =
         ]
 
 
-keyboardSubscription : Sub Msg
+keyboardSubscription : Sub Message
 keyboardSubscription =
     Keyboard.ups
         (\keyCode ->
@@ -37,6 +37,6 @@ keyboardSubscription =
         )
 
 
-timeStepSubscription : Sub Msg
+timeStepSubscription : Sub Message
 timeStepSubscription =
     Time.every Config.timeInterval (\time -> TimeStep)

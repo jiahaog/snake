@@ -1,22 +1,14 @@
-module Actions exposing (Msg(..), generateFood, generateSnake)
+module Actions exposing (generateFood, generateSnake)
 
 import Random exposing (Generator)
 import Config
+import Actions.Message exposing (Message(GenerateFood, GenerateSnake))
 import Models.Direction exposing (Direction, randomDirection)
 import Models.Food exposing (Food, foodGenerator)
 import Models.Geometry exposing (Coordinate, randomCoordinateOffset)
 
 
-type Msg
-    = Default
-    | StartGame
-    | GenerateSnake ( Coordinate, Direction )
-    | GenerateFood Food
-    | TimeStep
-    | NewDirection Direction
-
-
-generateFood : Cmd Msg
+generateFood : Cmd Message
 generateFood =
     Random.generate GenerateFood foodGenerator
 
@@ -31,6 +23,6 @@ snakeInitGenerator =
     Random.map2 (,) randomSnakeInitCoordinate randomDirection
 
 
-generateSnake : Cmd Msg
+generateSnake : Cmd Message
 generateSnake =
     Random.generate GenerateSnake snakeInitGenerator

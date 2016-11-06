@@ -3,13 +3,13 @@ module Components.View exposing (..)
 import Html exposing (Html, div, span, button, text, input, select, option, Attribute)
 import Html.Attributes exposing (value, classList)
 import Html.Events exposing (onClick, onInput, on, keyCode)
-import Actions exposing (Msg(..))
+import Actions.Message exposing (Message(..))
 import Components.Debugger exposing (debuggerView)
 import Models.Grid exposing (Grid, GridObject(..))
 import Models.Store exposing (Store)
 
 
-view : Store -> Html Msg
+view : Store -> Html Message
 view model =
     div []
         [ text "Elm Snake"
@@ -19,17 +19,17 @@ view model =
         ]
 
 
-renderGrid : Grid -> Html Msg
+renderGrid : Grid -> Html Message
 renderGrid grid =
     div [ classList [ ( "grid", True ) ] ] (List.map renderRow grid)
 
 
-renderRow : List GridObject -> Html Msg
+renderRow : List GridObject -> Html Message
 renderRow row =
     div [ classList [ ( "grid-row", True ) ] ] (List.map (\n -> renderCell n) row)
 
 
-renderCell : GridObject -> Html Msg
+renderCell : GridObject -> Html Message
 renderCell gridObject =
     span [ classList [ ( "grid-cell", True ), ( gridCellClass gridObject, True ) ] ] []
 
@@ -47,7 +47,7 @@ gridCellClass gridObject =
             "cell-food"
 
 
-renderButtons : Html Msg
+renderButtons : Html Message
 renderButtons =
     div []
         [ button [ onClick StartGame ] [ text "Start Game" ]

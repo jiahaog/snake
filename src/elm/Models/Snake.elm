@@ -4,7 +4,8 @@ import Set
 import Models.Direction exposing (Direction, randomDirection)
 import Models.Food exposing (Food)
 import Models.Geometry exposing (Coordinate, coordinateOffset, randomCoordinateOffset, maybeWrapAroundOutsideCoordinate)
-import Actions exposing (Msg(..), generateFood)
+import Actions exposing (generateFood)
+import Actions.Message exposing (Message)
 
 
 type alias Snake =
@@ -47,7 +48,7 @@ removeSnakeTail snake =
         |> List.reverse
 
 
-moveSnake : Direction -> Food -> Snake -> ( Snake, Cmd Msg )
+moveSnake : Direction -> Food -> Snake -> ( Snake, Cmd Message )
 moveSnake direction food snake =
     snake
         |> growSnake direction

@@ -1,6 +1,6 @@
 module Models.Store exposing (Store, init)
 
-import Actions exposing (Msg)
+import Actions.Message exposing (Message)
 import Config
 import Models.Direction exposing (Direction(Right))
 import Models.Food exposing (Food)
@@ -37,6 +37,6 @@ store =
     }
 
 
-init : ( Store, Cmd Msg )
+init : ( Store, Cmd Message )
 init =
     ( store, Cmd.none )
