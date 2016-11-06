@@ -4,16 +4,20 @@ const path = require('path');
 
 module.exports = {
   context: __dirname + '/src',
+
   entry: {
-    app: './app.js',
+    app: './static/index.js',
   },
+
   output: {
     filename: '[name].bundle.js',
     path: __dirname + '/dist'
   },
+
   devServer: {
     contentBase: __dirname + '/src',
   },
+
   module: {
     noParse: /\.elm$/,
     rules : [
@@ -30,7 +34,7 @@ module.exports = {
 
   plugins: [
     new HtmlWebpackPlugin({
-      template: 'index.tpl.html',
+      template: 'static/index.tpl.html',
       inject: 'body',
       filename: 'index.html'
     })

@@ -2,8 +2,9 @@
   "name": "elm-snake",
   "version": "1.0.0",
   "description": "Snake in Elm",
-  "main": "src/app.js",
+  "main": "src/static/index.js",
   "author": "Goh Jia Hao <jiahaog@gmail.com>",
+  "private": true,
   "license": "MIT",
   "devDependencies": {
     "css-loader": "^0.25.0",
