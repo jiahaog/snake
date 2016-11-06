@@ -1,29 +1,14 @@
-module Models.Snake exposing (Snake, SnakeInitData, newSnake, snakeInitGenerator, moveSnake)
+module Models.Snake exposing (Snake, newSnake, moveSnake)
 
 import Set
-import Random exposing (Generator)
-import Config
 import Models.Direction exposing (Direction, randomDirection)
 import Models.Food exposing (Food)
 import Models.Geometry exposing (Coordinate, coordinateOffset, randomCoordinateOffset, maybeWrapAroundOutsideCoordinate)
+import Actions exposing (Msg(..), generateFood)
 
 
 type alias Snake =
     List Coordinate
-
-
-type alias SnakeInitData =
-    ( Coordinate, Direction )
-
-
-randomSnakeInitCoordinate : Random.Generator Coordinate
-randomSnakeInitCoordinate =
-    randomCoordinateOffset (Config.initialSnakeLength - 1)
-
-
-snakeInitGenerator : Generator SnakeInitData
-snakeInitGenerator =
-    Random.map2 (,) randomSnakeInitCoordinate randomDirection
 
 
 newSnake : Coordinate -> Direction -> Snake
@@ -62,15 +47,15 @@ removeSnakeTail snake =
         |> List.reverse
 
 
-moveSnake : Direction -> Food -> Snake -> Snake
+moveSnake : Direction -> Food -> Snake -> ( Snake, Cmd Msg )
 moveSnake direction food snake =
     snake
         |> growSnake direction
         |> (\snake ->
                 if snakeHeadOnFood food snake then
-                    snake
+                    ( snake, generateFood )
                 else
-                    removeSnakeTail snake
+                    ( removeSnakeTail snake, Cmd.none )
            )
 
 

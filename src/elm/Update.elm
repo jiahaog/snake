@@ -1,11 +1,10 @@
 module Update exposing (update)
 
 import Random
-import Actions exposing (Msg(..))
+import Actions exposing (Msg(..), generateFood, generateSnake)
 import Models.Direction exposing (preventBackwardsDirection)
-import Models.Food exposing (foodGenerator)
 import Models.Grid exposing (updateGrid, foodOverlapsSnake)
-import Models.Snake exposing (newSnake, snakeInitGenerator, moveSnake)
+import Models.Snake exposing (newSnake, moveSnake)
 import Models.Store exposing (Store)
 
 
@@ -16,27 +15,27 @@ update msg store =
             ( store, Cmd.none )
 
         StartGame ->
-            ( store, (Random.generate GenerateSnake snakeInitGenerator) )
+            ( store, generateSnake )
 
         GenerateSnake ( coordinate, direction ) ->
             let
                 snake =
                     newSnake coordinate direction
             in
-                ( { store | snake = snake, grid = updateGrid store.grid snake store.food }, Random.generate GenerateFood foodGenerator )
+                ( { store | snake = snake, grid = updateGrid store.grid snake store.food }, generateFood )
 
         GenerateFood food ->
             if foodOverlapsSnake store.snake food then
-                ( store, Random.generate GenerateFood foodGenerator )
+                ( store, generateFood )
             else
                 ( { store | food = food, grid = updateGrid store.grid store.snake food }, Cmd.none )
 
         TimeStep ->
             let
-                snake =
+                ( snake, cmd ) =
                     moveSnake store.lastDirection store.food store.snake
             in
-                ( { store | snake = snake, grid = updateGrid store.grid snake store.food }, Cmd.none )
+                ( { store | snake = snake, grid = updateGrid store.grid snake store.food }, cmd )
 
         NewDirection direction ->
             ( { store | lastDirection = preventBackwardsDirection store.lastDirection direction }, Cmd.none )
