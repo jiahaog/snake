@@ -30,7 +30,7 @@ store : Store
 store =
     { snake = [ [ 1, 2 ] ]
     , grid = createGrid Config.xSize Config.ySize
-    , food = [ 2, 3 ]
+    , food = []
     }
 
 

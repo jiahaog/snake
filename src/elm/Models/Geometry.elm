@@ -1,4 +1,4 @@
-module Models.Geometry exposing (Coordinate, Direction(..), randomDirection, randomCoordinateOffset, coordinateOffset, maybeWrapAroundOutsideCoordinate)
+module Models.Geometry exposing (Coordinate, Direction(..), randomDirection, randomCoordinateOffset, randomCoordinate, coordinateOffset, maybeWrapAroundOutsideCoordinate)
 
 import Random
 import Array
@@ -22,9 +22,9 @@ randomCoordinateOffset offset =
         -- first subtract 1 because Random.int is inclusive
         -
             1
-        -- Then subtract the initial snake length away (excluding the head)
+        -- Then subtract the offset
         -
-            (Config.initialSnakeLength - 1)
+            offset
     )
         |> Random.int offset
         |> Random.list Config.dimensions

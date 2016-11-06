@@ -5,12 +5,12 @@ import Array
 
 xSize : Int
 xSize =
-    5
+    10
 
 
 ySize : Int
 ySize =
-    5
+    10
 
 
 dimensions : Int
