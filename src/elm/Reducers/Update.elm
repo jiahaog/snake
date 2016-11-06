@@ -1,4 +1,4 @@
-module Update exposing (update)
+module Reducers.Update exposing (update)
 
 import Actions.GenerateFood exposing (generateFood)
 import Actions.Message exposing (Message(..))

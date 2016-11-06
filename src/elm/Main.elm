@@ -4,7 +4,7 @@ import Html.App as App
 import Components.View exposing (view)
 import Models.Store exposing (appStoreInit)
 import Subscriptions exposing (subscriptions)
-import Update exposing (update)
+import Reducers.Update exposing (update)
 
 
 main : Program Never
