@@ -1,11 +1,11 @@
 module Subscriptions exposing (subscriptions)
 
-import Keyboard
-import Actions exposing (Msg(TimeStep, NewDirection, Default))
-import Models.Store exposing (Store)
-import Models.Direction exposing (Direction(..))
 import Char
+import Keyboard
 import Platform.Sub
+import Actions exposing (Msg(TimeStep, NewDirection, Default))
+import Models.Direction exposing (Direction(..))
+import Models.Store exposing (Store)
 
 
 subscriptions : Store -> Sub Msg

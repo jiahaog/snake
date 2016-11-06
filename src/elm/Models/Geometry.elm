@@ -1,7 +1,7 @@
 module Models.Geometry exposing (Coordinate, randomCoordinateOffset, randomCoordinate, coordinateOffset, maybeWrapAroundOutsideCoordinate)
 
-import Random
 import Array
+import Random
 import Config
 import Models.Direction exposing (Direction(..))
 

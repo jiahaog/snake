@@ -1,11 +1,11 @@
 module Models.Store exposing (Store, init)
 
-import Models.Snake exposing (Snake)
-import Models.Food exposing (Food)
-import Models.Grid exposing (Grid, GridObject(Empty))
-import Models.Direction exposing (Direction(Right))
 import Actions exposing (Msg)
 import Config
+import Models.Direction exposing (Direction(Right))
+import Models.Food exposing (Food)
+import Models.Grid exposing (Grid, GridObject(Empty))
+import Models.Snake exposing (Snake)
 
 
 type alias Store =

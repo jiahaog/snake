@@ -1,13 +1,11 @@
 module Models.Snake exposing (Snake, SnakeInitData, newSnake, snakeInitGenerator, moveSnake)
 
+import Set
 import Random exposing (Generator)
 import Config
+import Models.Direction exposing (Direction, randomDirection)
 import Models.Food exposing (Food)
 import Models.Geometry exposing (Coordinate, coordinateOffset, randomCoordinateOffset, maybeWrapAroundOutsideCoordinate)
-import Models.Direction exposing (Direction, randomDirection)
-import Array
-import Debug
-import Set
 
 
 type alias Snake =

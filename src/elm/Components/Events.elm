@@ -1,8 +1,8 @@
 module Components.Events exposing (onEnter)
 
+import Json.Decode as Json
 import Html exposing (Attribute)
 import Html.Events exposing (on, keyCode)
-import Json.Decode as Json
 import Actions exposing (Msg(..))
 
 

@@ -1,10 +1,10 @@
 module Main exposing (..)
 
 import Html.App as App
-import Models.Store exposing (init)
-import Update exposing (update)
 import Components.View exposing (view)
+import Models.Store exposing (init)
 import Subscriptions exposing (subscriptions)
+import Update exposing (update)
 
 
 main : Program Never

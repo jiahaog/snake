@@ -1,8 +1,8 @@
 module Models.Grid exposing (Grid, GridObject(..), updateGrid, foodOverlapsSnake)
 
-import Models.Snake exposing (Snake)
-import Models.Food exposing (Food)
 import Set
+import Models.Food exposing (Food)
+import Models.Snake exposing (Snake)
 
 
 type alias Grid =

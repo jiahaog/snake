@@ -1,12 +1,12 @@
 module Update exposing (update)
 
-import Models.Store exposing (Store)
-import Models.Snake exposing (newSnake, snakeInitGenerator, moveSnake)
+import Random
+import Actions exposing (Msg(..))
+import Models.Direction exposing (preventBackwardsDirection)
 import Models.Food exposing (foodGenerator)
 import Models.Grid exposing (updateGrid, foodOverlapsSnake)
-import Models.Direction exposing (preventBackwardsDirection)
-import Actions exposing (Msg(..))
-import Random
+import Models.Snake exposing (newSnake, snakeInitGenerator, moveSnake)
+import Models.Store exposing (Store)
 
 
 update : Msg -> Store -> ( Store, Cmd Msg )

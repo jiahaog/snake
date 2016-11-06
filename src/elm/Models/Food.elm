@@ -1,7 +1,7 @@
 module Models.Food exposing (Food, foodGenerator)
 
-import Models.Geometry exposing (Coordinate, randomCoordinate)
 import Random
+import Models.Geometry exposing (Coordinate, randomCoordinate)
 
 
 type alias Food =
