@@ -7,6 +7,7 @@ import Models.Direction exposing (preventBackwardsDirection)
 import Models.Grid exposing (updateGrid, updateGridSnake, updateGridFood, foodOverlapsSnake)
 import Models.Snake exposing (newSnake, moveSnake)
 import Models.Store exposing (Store, initialStore)
+import Reducers.Helpers exposing (snakeExists, snakeAndFoodExists)
 
 
 update : Message -> Store -> ( Store, Cmd Message )
@@ -26,32 +27,23 @@ update message store =
                 ( { store | snake = Just snake, grid = updateGridSnake snake store.grid }, generateFood )
 
         GenerateFood food ->
-            case store.snake of
-                Nothing ->
-                    ( store, Cmd.none )
-
-                Just snake ->
+            snakeExists store
+                (\store snake ->
                     if foodOverlapsSnake snake food then
                         ( store, generateFood )
                     else
                         ( { store | food = Just food, grid = updateGridFood food store.grid, score = store.score + 1 }, Cmd.none )
+                )
 
         TimeStep ->
-            case store.snake of
-                Nothing ->
-                    ( store, Cmd.none )
-
-                Just snake ->
-                    case store.food of
-                        Nothing ->
-                            ( store, Cmd.none )
-
-                        Just food ->
-                            let
-                                ( snake, cmd ) =
-                                    moveSnake store.lastDirection food snake
-                            in
-                                ( { store | snake = Just snake, grid = updateGrid snake food store.grid }, cmd )
+            snakeAndFoodExists store
+                (\store snake food ->
+                    let
+                        ( snake, cmd ) =
+                            moveSnake store.lastDirection food snake
+                    in
+                        ( { store | snake = Just snake, grid = updateGrid snake food store.grid }, cmd )
+                )
 
         NewDirection direction ->
             ( { store | lastDirection = preventBackwardsDirection store.lastDirection direction }, Cmd.none )
