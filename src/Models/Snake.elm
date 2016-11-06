@@ -2,9 +2,11 @@ module Models.Snake exposing (Snake, SnakeInitData, newSnake, snakeInitGenerator
 
 import Random exposing (Generator)
 import Config exposing (config)
+import Models.Food exposing (Food)
 import Models.Geometry exposing (Coordinate, Direction, coordinateOffset, randomCoordinateOffset, randomDirection)
 import Array
 import Debug
+import Set
 
 
 type alias Snake =
@@ -84,8 +86,8 @@ growInDirection snake direction head =
 
 growSnake : Direction -> Snake -> Snake
 growSnake direction snake =
-    List.head snake
-        |> maybeCoordinate
+    snake
+        |> getSnakeHead
         |> growInDirection snake direction
 
 
@@ -107,8 +109,31 @@ removeSnakeTail snake =
         |> maybeWithoutTail
 
 
-moveSnake : Direction -> Snake -> Snake
-moveSnake direction snake =
+moveSnake : Direction -> Food -> Snake -> Snake
+moveSnake direction food snake =
     snake
         |> growSnake direction
-        |> removeSnakeTail
+        |> (\snake ->
+                if snakeHeadOnFood food snake then
+                    snake
+                else
+                    removeSnakeTail snake
+           )
+
+
+getSnakeHead : Snake -> Coordinate
+getSnakeHead snake =
+    List.head
+        snake
+        |> maybeCoordinate
+
+
+snakeHeadOnFood : Food -> Snake -> Bool
+snakeHeadOnFood food snake =
+    snake
+        |> getSnakeHead
+        |> (\head ->
+                food
+                    |> Set.singleton
+                    |> Set.member head
+           )

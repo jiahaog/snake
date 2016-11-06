@@ -2,7 +2,7 @@ module Update exposing (update)
 
 import Models.Store exposing (Store)
 import Models.Snake exposing (newSnake, snakeInitGenerator, moveSnake)
-import Models.Grid exposing (gridWithSnake)
+import Models.Grid exposing (gridWithSnakeAndFood)
 import Actions exposing (Msg(..))
 import Random
 
@@ -21,11 +21,11 @@ update msg store =
                 snake =
                     newSnake coordinate direction
             in
-                ( { store | snake = snake, grid = gridWithSnake store.grid snake }, Cmd.none )
+                ( { store | snake = snake, grid = gridWithSnakeAndFood store.grid snake store.food }, Cmd.none )
 
         MoveSnake direction ->
             let
                 snake =
-                    moveSnake direction store.snake
+                    moveSnake direction store.food store.snake
             in
-                ( { store | snake = snake, grid = gridWithSnake store.grid snake }, Cmd.none )
+                ( { store | snake = snake, grid = gridWithSnakeAndFood store.grid snake store.food }, Cmd.none )

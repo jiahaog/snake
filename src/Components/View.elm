@@ -45,14 +45,14 @@ gridCellClass gridObject =
         SnakeCell ->
             "cell-snake"
 
-        Food ->
+        FoodCell ->
             "cell-food"
 
 
 renderButtons : Html Msg
 renderButtons =
     div []
-        [ button [ onClick StartGame ] [ text "Create Snake" ]
+        [ button [ onClick StartGame ] [ text "Start Game" ]
         , button [ onClick (MoveSnake Up) ] [ text "Move Up" ]
         , button [ onClick (MoveSnake Right) ] [ text "Move Right" ]
         , button [ onClick (MoveSnake Down) ] [ text "Move Down" ]
