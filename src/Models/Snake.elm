@@ -28,20 +28,26 @@ newSnake head direction =
     growSnake direction [ head ]
 
 
-maybeGrowSnake : Snake -> (Coordinate -> Coordinate) -> Maybe Coordinate -> Snake
-maybeGrowSnake snake whereToPut maybeHead =
-    case maybeHead of
-        Just head ->
-            (::) (whereToPut head) snake
+maybeCoordinate : Maybe Coordinate -> Coordinate
+maybeCoordinate coordinate =
+    case coordinate of
+        Just coordinate ->
+            coordinate
 
         Nothing ->
             []
 
 
+growInDirection : Snake -> Direction -> Coordinate -> Snake
+growInDirection snake direction head =
+    (::) (coordinateOffset direction head) snake
+
+
 growSnake : Direction -> Snake -> Snake
 growSnake direction snake =
     List.head snake
-        |> maybeGrowSnake snake (coordinateOffset direction)
+        |> maybeCoordinate
+        |> growInDirection snake direction
 
 
 maybeWithoutTail : Maybe Snake -> Snake
