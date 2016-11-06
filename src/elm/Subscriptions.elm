@@ -6,6 +6,7 @@ import Platform.Sub
 import Time
 import Actions.Message exposing (Message(TimeStep, NewDirection, Default))
 import Config
+import Models.GameState exposing (GameState(StateGameStarted))
 import Models.Direction exposing (Direction(..))
 import Models.Store exposing (Store)
 
@@ -13,7 +14,7 @@ import Models.Store exposing (Store)
 subscriptions : Store -> Sub Message
 subscriptions model =
     Platform.Sub.batch
-        [ timeStepSubscription
+        [ timeStepSubscription model.gameState
         , keyboardSubscription
         ]
 
@@ -37,6 +38,11 @@ keyboardSubscription =
         )
 
 
-timeStepSubscription : Sub Message
-timeStepSubscription =
-    Time.every Config.timeInterval (\time -> TimeStep)
+timeStepSubscription : GameState -> Sub Message
+timeStepSubscription gameState =
+    case gameState of
+        StateGameStarted ->
+            Time.every Config.timeInterval (\time -> TimeStep)
+
+        _ ->
+            Sub.none

@@ -1,4 +1,4 @@
-module Models.Grid exposing (Grid, GridObject(..), updateGrid, updateGridFood, updateGridSnake, foodOverlapsSnake)
+module Models.Grid exposing (Grid, GridObject(..), updateGrid, updateGridFood, updateGridSnake)
 
 import Set exposing (Set)
 import Models.Food exposing (Food)
@@ -50,9 +50,3 @@ updateGrid snake food grid =
     grid
         |> updateGridFood food
         |> updateGridSnake snake
-
-
-foodOverlapsSnake : Snake -> Food -> Bool
-foodOverlapsSnake snake food =
-    Set.fromList snake
-        |> Set.member food

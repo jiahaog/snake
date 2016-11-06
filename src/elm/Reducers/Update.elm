@@ -4,8 +4,9 @@ import Actions.GenerateFood exposing (generateFood)
 import Actions.Message exposing (Message(..))
 import Actions.GenerateSnake exposing (generateSnake)
 import Models.Direction exposing (preventBackwardsDirection)
-import Models.Grid exposing (updateGrid, updateGridSnake, updateGridFood, foodOverlapsSnake)
-import Models.Snake exposing (newSnake, moveSnake)
+import Models.Grid exposing (updateGrid, updateGridSnake, updateGridFood)
+import Models.Snake exposing (newSnake, moveSnake, coordinateOverlapsSnake)
+import Models.GameState exposing (GameState(StateGameStarted, StateGameOver))
 import Models.Store exposing (Store, initialStore)
 import Reducers.Helpers exposing (snakeExists, snakeAndFoodExists)
 
@@ -17,7 +18,7 @@ update message store =
             ( store, Cmd.none )
 
         NewGame ->
-            ( initialStore, generateSnake )
+            ( { initialStore | gameState = StateGameStarted }, generateSnake )
 
         GenerateSnake ( coordinate, direction ) ->
             let
@@ -29,7 +30,7 @@ update message store =
         GenerateFood food ->
             snakeExists store
                 (\store snake ->
-                    if foodOverlapsSnake snake food then
+                    if coordinateOverlapsSnake snake food then
                         ( store, generateFood )
                     else
                         ( { store | food = Just food, grid = updateGridFood food store.grid, score = store.score + 1 }, Cmd.none )
@@ -47,3 +48,6 @@ update message store =
 
         NewDirection direction ->
             ( { store | lastDirection = preventBackwardsDirection store.lastDirection direction }, Cmd.none )
+
+        GameOver ->
+            ( { store | gameState = StateGameOver }, Cmd.none )

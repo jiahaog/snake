@@ -4,6 +4,7 @@ import Actions.Message exposing (Message)
 import Config
 import Models.Direction exposing (Direction(Right))
 import Models.Food exposing (Food)
+import Models.GameState exposing (GameState(StateGameWaiting))
 import Models.Grid exposing (Grid, GridObject(Empty))
 import Models.Snake exposing (Snake)
 
@@ -14,6 +15,7 @@ type alias Store =
     , food : Maybe Food
     , lastDirection : Direction
     , score : Int
+    , gameState : GameState
     }
 
 
@@ -36,6 +38,7 @@ initialStore =
     , food = Maybe.Nothing
     , lastDirection = Right
     , score = -1
+    , gameState = StateGameWaiting
     }
 
 

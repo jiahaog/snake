@@ -1,11 +1,11 @@
-module Models.Snake exposing (Snake, newSnake, moveSnake)
+module Models.Snake exposing (Snake, newSnake, moveSnake, coordinateOverlapsSnake)
 
 import Set
-import Models.Direction exposing (Direction, randomDirection)
+import Models.Direction exposing (Direction)
 import Models.Food exposing (Food)
 import Models.Geometry exposing (Coordinate, coordinateOffset, randomCoordinateOffset, maybeWrapAroundOutsideCoordinate)
 import Actions.GenerateFood exposing (generateFood)
-import Actions.Message exposing (Message)
+import Actions.Message exposing (Message(GameOver), messageToCmd)
 
 
 type alias Snake =
@@ -53,7 +53,9 @@ moveSnake direction food snake =
     snake
         |> growSnake direction
         |> (\snake ->
-                if snakeHeadOnFood food snake then
+                if snakeHeadOnSelf snake then
+                    ( snake, messageToCmd GameOver )
+                else if snakeHeadOnFood food snake then
                     ( snake, generateFood )
                 else
                     ( removeSnakeTail snake, Cmd.none )
@@ -69,3 +71,23 @@ snakeHeadOnFood food snake =
                     |> Set.singleton
                     |> Set.member head
            )
+
+
+withoutSnakeHead : Snake -> Snake
+withoutSnakeHead snake =
+    snake
+        |> List.tail
+        |> Maybe.withDefault []
+
+
+snakeHeadOnSelf : Snake -> Bool
+snakeHeadOnSelf snake =
+    snake
+        |> getSnakeHead
+        |> coordinateOverlapsSnake (withoutSnakeHead snake)
+
+
+coordinateOverlapsSnake : Snake -> Coordinate -> Bool
+coordinateOverlapsSnake snake coordinate =
+    Set.fromList snake
+        |> Set.member coordinate
