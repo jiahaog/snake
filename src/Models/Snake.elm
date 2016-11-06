@@ -1,7 +1,7 @@
 module Models.Snake exposing (Snake, SnakeInitData, newSnake, snakeInitGenerator, moveSnake)
 
 import Random exposing (Generator)
-import Config exposing (config)
+import Config
 import Models.Food exposing (Food)
 import Models.Geometry exposing (Coordinate, Direction, coordinateOffset, randomCoordinateOffset, randomDirection, maybeWrapAroundOutsideCoordinate)
 import Array
@@ -19,7 +19,7 @@ type alias SnakeInitData =
 
 randomSnakeInitCoordinate : Random.Generator Coordinate
 randomSnakeInitCoordinate =
-    randomCoordinateOffset (config.initialSnakeLength - 1)
+    randomCoordinateOffset (Config.initialSnakeLength - 1)
 
 
 snakeInitGenerator : Generator SnakeInitData

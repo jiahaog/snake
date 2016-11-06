@@ -1,7 +1,28 @@
-module Config exposing (config)
+module Config exposing (..)
 
 import Array
 
 
-config =
-    { xSize = 5, ySize = 5, dimensions = 2, initialSnakeLength = 2, boundsArray = Array.fromList [ 5, 5 ] }
+xSize : Int
+xSize =
+    5
+
+
+ySize : Int
+ySize =
+    5
+
+
+dimensions : Int
+dimensions =
+    2
+
+
+boundsArray : Array.Array Int
+boundsArray =
+    Array.fromList [ xSize, ySize ]
+
+
+initialSnakeLength : Int
+initialSnakeLength =
+    2

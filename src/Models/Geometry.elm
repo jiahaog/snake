@@ -2,7 +2,7 @@ module Models.Geometry exposing (Coordinate, Direction(..), randomDirection, ran
 
 import Random
 import Array
-import Config exposing (config)
+import Config
 
 
 type alias Coordinate =
@@ -18,16 +18,16 @@ type Direction
 
 randomCoordinateOffset : Int -> Random.Generator Coordinate
 randomCoordinateOffset offset =
-    (config.xSize
+    (Config.xSize
         -- first subtract 1 because Random.int is inclusive
         -
             1
         -- Then subtract the initial snake length away (excluding the head)
         -
-            (config.initialSnakeLength - 1)
+            (Config.initialSnakeLength - 1)
     )
         |> Random.int offset
-        |> Random.list config.dimensions
+        |> Random.list Config.dimensions
 
 
 randomCoordinate : Random.Generator Coordinate
@@ -122,7 +122,7 @@ coordinateOffset direction =
 
 getBounds : Int -> Int
 getBounds dimension =
-    Maybe.withDefault (999) (Array.get dimension config.boundsArray)
+    Maybe.withDefault (999) (Array.get dimension Config.boundsArray)
 
 
 maybeWrapAroundOutsideCoordinate : Coordinate -> Coordinate

@@ -4,7 +4,7 @@ import Models.Snake exposing (Snake)
 import Models.Food exposing (Food)
 import Models.Grid exposing (Grid, GridObject(Empty))
 import Actions exposing (Msg)
-import Config exposing (config)
+import Config
 
 
 type alias Store =
@@ -29,7 +29,7 @@ createGrid rows columns =
 store : Store
 store =
     { snake = [ [ 1, 2 ] ]
-    , grid = createGrid config.xSize config.ySize
+    , grid = createGrid Config.xSize Config.ySize
     , food = [ 2, 3 ]
     }
 
