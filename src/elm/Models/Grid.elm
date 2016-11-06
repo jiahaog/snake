@@ -1,7 +1,8 @@
-module Models.Grid exposing (Grid, GridObject(..), updateGrid, foodOverlapsSnake)
+module Models.Grid exposing (Grid, GridObject(..), updateGrid, updateGridFood, updateGridSnake, foodOverlapsSnake)
 
-import Set
+import Set exposing (Set)
 import Models.Food exposing (Food)
+import Models.Geometry exposing (Coordinate)
 import Models.Snake exposing (Snake)
 
 
@@ -15,29 +16,40 @@ type GridObject
     | FoodCell
 
 
-updateGrid : Grid -> Snake -> Food -> Grid
-updateGrid grid snake food =
-    let
-        snakeSet =
-            Set.fromList snake
+updateGridFromSet : Grid -> Set Coordinate -> GridObject -> Grid
+updateGridFromSet grid set gridObject =
+    List.indexedMap
+        (\yIndex row ->
+            List.indexedMap
+                (\xIndex cell ->
+                    if Set.member [ xIndex, yIndex ] set then
+                        gridObject
+                    else if cell == gridObject then
+                        -- Don't touch cells of other types
+                        Empty
+                    else
+                        cell
+                )
+                row
+        )
+        grid
 
-        foodSet =
-            Set.singleton food
-    in
-        List.indexedMap
-            (\yIndex row ->
-                List.indexedMap
-                    (\xIndex cell ->
-                        if Set.member [ xIndex, yIndex ] snakeSet then
-                            SnakeCell
-                        else if Set.member [ xIndex, yIndex ] foodSet then
-                            FoodCell
-                        else
-                            Empty
-                    )
-                    row
-            )
-            grid
+
+updateGridSnake : Snake -> Grid -> Grid
+updateGridSnake snake grid =
+    updateGridFromSet grid (Set.fromList snake) SnakeCell
+
+
+updateGridFood : Food -> Grid -> Grid
+updateGridFood food grid =
+    updateGridFromSet grid (Set.singleton food) FoodCell
+
+
+updateGrid : Snake -> Food -> Grid -> Grid
+updateGrid snake food grid =
+    grid
+        |> updateGridFood food
+        |> updateGridSnake snake
 
 
 foodOverlapsSnake : Snake -> Food -> Bool

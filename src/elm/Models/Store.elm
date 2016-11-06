@@ -9,9 +9,9 @@ import Models.Snake exposing (Snake)
 
 
 type alias Store =
-    { snake : Snake
+    { snake : Maybe Snake
     , grid : Grid
-    , food : Food
+    , food : Maybe Food
     , lastDirection : Direction
     , score : Int
     }
@@ -31,9 +31,9 @@ createGrid rows columns =
 
 initialStore : Store
 initialStore =
-    { snake = []
+    { snake = Maybe.Nothing
     , grid = createGrid Config.xSize Config.ySize
-    , food = []
+    , food = Maybe.Nothing
     , lastDirection = Right
     , score = -1
     }
