@@ -3,6 +3,8 @@ module Models.Snake exposing (Snake, SnakeInitData, newSnake, snakeInitGenerator
 import Random exposing (Generator)
 import Config exposing (config)
 import Models.Geometry exposing (Coordinate, Direction, coordinateOffset, randomCoordinateOffset, randomDirection)
+import Array
+import Debug
 
 
 type alias Snake =
@@ -38,9 +40,46 @@ maybeCoordinate coordinate =
             []
 
 
+maybeGetBounds : Maybe Int -> Int
+maybeGetBounds maybeInt =
+    case maybeInt of
+        Just int ->
+            int
+
+        Nothing ->
+            Debug.crash "config.boundsArray index out of range"
+
+
+getBounds : Int -> Int
+getBounds dimension =
+    Array.get dimension config.boundsArray
+        |> maybeGetBounds
+
+
+maybeWrapAroundHead : Coordinate -> Coordinate
+maybeWrapAroundHead head =
+    head
+        |> List.indexedMap
+            (\index value ->
+                index
+                    |> getBounds
+                    |> (\bounds ->
+                            if value < 0 then
+                                bounds - 1
+                            else if value >= bounds then
+                                0
+                            else
+                                value
+                       )
+            )
+
+
 growInDirection : Snake -> Direction -> Coordinate -> Snake
 growInDirection snake direction head =
-    (::) (coordinateOffset direction head) snake
+    head
+        |> coordinateOffset direction
+        |> maybeWrapAroundHead
+        |> (\newHead -> (::) newHead snake)
 
 
 growSnake : Direction -> Snake -> Snake
@@ -71,5 +110,5 @@ removeSnakeTail snake =
 moveSnake : Direction -> Snake -> Snake
 moveSnake direction snake =
     snake
-        |> removeSnakeTail
         |> growSnake direction
+        |> removeSnakeTail
