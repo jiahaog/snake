@@ -1,7 +1,8 @@
 module Update exposing (update)
 
+import Actions.GenerateFood exposing (generateFood)
 import Actions.Message exposing (Message(..))
-import Actions exposing (generateFood, generateSnake)
+import Actions.GenerateSnake exposing (generateSnake)
 import Models.Direction exposing (preventBackwardsDirection)
 import Models.Grid exposing (updateGrid, foodOverlapsSnake)
 import Models.Snake exposing (newSnake, moveSnake)

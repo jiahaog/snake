@@ -1,16 +1,10 @@
-module Actions exposing (generateFood, generateSnake)
+module Actions.GenerateSnake exposing (generateSnake)
 
 import Random exposing (Generator)
+import Actions.Message exposing (Message(GenerateSnake))
 import Config
-import Actions.Message exposing (Message(GenerateFood, GenerateSnake))
 import Models.Direction exposing (Direction, randomDirection)
-import Models.Food exposing (Food, foodGenerator)
 import Models.Geometry exposing (Coordinate, randomCoordinateOffset)
-
-
-generateFood : Cmd Message
-generateFood =
-    Random.generate GenerateFood foodGenerator
 
 
 randomSnakeInitCoordinate : Generator Coordinate

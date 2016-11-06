@@ -4,7 +4,7 @@ import Set
 import Models.Direction exposing (Direction, randomDirection)
 import Models.Food exposing (Food)
 import Models.Geometry exposing (Coordinate, coordinateOffset, randomCoordinateOffset, maybeWrapAroundOutsideCoordinate)
-import Actions exposing (generateFood)
+import Actions.GenerateFood exposing (generateFood)
 import Actions.Message exposing (Message)
 
 
