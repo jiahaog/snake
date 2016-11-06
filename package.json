@@ -19,7 +19,7 @@
   },
   "scripts": {
     "clean": "rimraf dist",
-    "build:prod": "webpack -p",
+    "build": "webpack -p",
     "start": "webpack-dev-server --inline --hot"
   },
   "dependencies": {},
