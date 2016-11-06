@@ -3,7 +3,7 @@ module Models.Snake exposing (Snake, SnakeInitData, newSnake, snakeInitGenerator
 import Random exposing (Generator)
 import Config exposing (config)
 import Models.Food exposing (Food)
-import Models.Geometry exposing (Coordinate, Direction, coordinateOffset, randomCoordinateOffset, randomDirection)
+import Models.Geometry exposing (Coordinate, Direction, coordinateOffset, randomCoordinateOffset, randomDirection, maybeWrapAroundOutsideCoordinate)
 import Array
 import Debug
 import Set
@@ -32,55 +32,18 @@ newSnake head direction =
     growSnake direction [ head ]
 
 
-maybeCoordinate : Maybe Coordinate -> Coordinate
-maybeCoordinate coordinate =
-    case coordinate of
-        Just coordinate ->
-            coordinate
-
-        Nothing ->
-            []
-
-
-maybeGetBounds : Maybe Int -> Int
-maybeGetBounds maybeInt =
-    case maybeInt of
-        Just int ->
-            int
-
-        Nothing ->
-            Debug.crash "config.boundsArray index out of range"
-
-
-getBounds : Int -> Int
-getBounds dimension =
-    Array.get dimension config.boundsArray
-        |> maybeGetBounds
-
-
-maybeWrapAroundHead : Coordinate -> Coordinate
-maybeWrapAroundHead head =
-    head
-        |> List.indexedMap
-            (\index value ->
-                index
-                    |> getBounds
-                    |> (\bounds ->
-                            if value < 0 then
-                                bounds - 1
-                            else if value >= bounds then
-                                0
-                            else
-                                value
-                       )
-            )
+getSnakeHead : Snake -> Coordinate
+getSnakeHead snake =
+    snake
+        |> List.head
+        |> Maybe.withDefault []
 
 
 growInDirection : Snake -> Direction -> Coordinate -> Snake
 growInDirection snake direction head =
     head
         |> coordinateOffset direction
-        |> maybeWrapAroundHead
+        |> maybeWrapAroundOutsideCoordinate
         |> (\newHead -> (::) newHead snake)
 
 
@@ -91,22 +54,13 @@ growSnake direction snake =
         |> growInDirection snake direction
 
 
-maybeWithoutTail : Maybe Snake -> Snake
-maybeWithoutTail maybeSnake =
-    case maybeSnake of
-        Just withoutTail ->
-            List.reverse withoutTail
-
-        Nothing ->
-            []
-
-
 removeSnakeTail : Snake -> Snake
 removeSnakeTail snake =
     snake
         |> List.reverse
         |> List.tail
-        |> maybeWithoutTail
+        |> Maybe.withDefault []
+        |> List.reverse
 
 
 moveSnake : Direction -> Food -> Snake -> Snake
@@ -119,13 +73,6 @@ moveSnake direction food snake =
                 else
                     removeSnakeTail snake
            )
-
-
-getSnakeHead : Snake -> Coordinate
-getSnakeHead snake =
-    List.head
-        snake
-        |> maybeCoordinate
 
 
 snakeHeadOnFood : Food -> Snake -> Bool

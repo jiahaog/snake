@@ -1,6 +1,7 @@
-module Models.Geometry exposing (Coordinate, Direction(..), randomDirection, randomCoordinateOffset, coordinateOffset)
+module Models.Geometry exposing (Coordinate, Direction(..), randomDirection, randomCoordinateOffset, coordinateOffset, maybeWrapAroundOutsideCoordinate)
 
 import Random
+import Array
 import Config exposing (config)
 
 
@@ -117,3 +118,26 @@ coordinateOffset direction =
 
         Left ->
             coordinateLeft
+
+
+getBounds : Int -> Int
+getBounds dimension =
+    Maybe.withDefault (999) (Array.get dimension config.boundsArray)
+
+
+maybeWrapAroundOutsideCoordinate : Coordinate -> Coordinate
+maybeWrapAroundOutsideCoordinate head =
+    head
+        |> List.indexedMap
+            (\index value ->
+                index
+                    |> getBounds
+                    |> (\bounds ->
+                            if value < 0 then
+                                bounds - 1
+                            else if value >= bounds then
+                                0
+                            else
+                                value
+                       )
+            )
