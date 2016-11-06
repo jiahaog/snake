@@ -62,10 +62,13 @@ moveSnake direction food snake =
 
 snakeHeadOnFood : Food -> Snake -> Bool
 snakeHeadOnFood food snake =
-    snake
-        |> getSnakeHead
-        |> (\head ->
-                food
-                    |> Set.singleton
-                    |> Set.member head
-           )
+    if List.isEmpty food then
+        False
+    else
+        snake
+            |> getSnakeHead
+            |> (\head ->
+                    food
+                        |> Set.singleton
+                        |> Set.member head
+               )
