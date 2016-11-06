@@ -4,6 +4,7 @@ import Models.Store exposing (Store)
 import Models.Snake exposing (newSnake, snakeInitGenerator, moveSnake)
 import Models.Food exposing (foodGenerator)
 import Models.Grid exposing (updateGrid, foodOverlapsSnake)
+import Models.Direction exposing (preventBackwardsDirection)
 import Actions exposing (Msg(..))
 import Random
 
@@ -30,9 +31,12 @@ update msg store =
             else
                 ( { store | food = food, grid = updateGrid store.grid store.snake food }, Cmd.none )
 
-        MoveSnake direction ->
+        TimeStep ->
             let
                 snake =
-                    moveSnake direction store.food store.snake
+                    moveSnake store.lastDirection store.food store.snake
             in
                 ( { store | snake = snake, grid = updateGrid store.grid snake store.food }, Cmd.none )
+
+        NewDirection direction ->
+            ( { store | lastDirection = preventBackwardsDirection store.lastDirection direction }, Cmd.none )

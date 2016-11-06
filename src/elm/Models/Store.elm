@@ -3,6 +3,7 @@ module Models.Store exposing (Store, init)
 import Models.Snake exposing (Snake)
 import Models.Food exposing (Food)
 import Models.Grid exposing (Grid, GridObject(Empty))
+import Models.Direction exposing (Direction(Right))
 import Actions exposing (Msg)
 import Config
 
@@ -11,6 +12,7 @@ type alias Store =
     { snake : Snake
     , grid : Grid
     , food : Food
+    , lastDirection : Direction
     }
 
 
@@ -31,6 +33,7 @@ store =
     { snake = [ [ 1, 2 ] ]
     , grid = createGrid Config.xSize Config.ySize
     , food = []
+    , lastDirection = Right
     }
 
 

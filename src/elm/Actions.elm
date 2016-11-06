@@ -2,7 +2,7 @@ module Actions exposing (Msg(..))
 
 import Models.Snake exposing (SnakeInitData)
 import Models.Food exposing (Food)
-import Models.Geometry exposing (Direction)
+import Models.Direction exposing (Direction)
 
 
 type Msg
@@ -10,4 +10,5 @@ type Msg
     | StartGame
     | GenerateSnake SnakeInitData
     | GenerateFood Food
-    | MoveSnake Direction
+    | TimeStep
+    | NewDirection Direction

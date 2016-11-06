@@ -8,7 +8,6 @@ import Models.Grid exposing (Grid)
 import Actions exposing (Msg(..))
 import Components.Debugger exposing (debuggerView)
 import Models.Grid exposing (GridObject(..))
-import Models.Geometry exposing (Direction(..))
 
 
 view : Store -> Html Msg
@@ -53,8 +52,5 @@ renderButtons : Html Msg
 renderButtons =
     div []
         [ button [ onClick StartGame ] [ text "Start Game" ]
-        , button [ onClick (MoveSnake Up) ] [ text "Move Up" ]
-        , button [ onClick (MoveSnake Right) ] [ text "Move Right" ]
-        , button [ onClick (MoveSnake Down) ] [ text "Move Down" ]
-        , button [ onClick (MoveSnake Left) ] [ text "Move Left" ]
+        , button [ onClick (TimeStep) ] [ text "TimeStep" ]
         ]

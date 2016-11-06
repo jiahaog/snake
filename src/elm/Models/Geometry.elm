@@ -1,19 +1,13 @@
-module Models.Geometry exposing (Coordinate, Direction(..), randomDirection, randomCoordinateOffset, randomCoordinate, coordinateOffset, maybeWrapAroundOutsideCoordinate)
+module Models.Geometry exposing (Coordinate, randomCoordinateOffset, randomCoordinate, coordinateOffset, maybeWrapAroundOutsideCoordinate)
 
 import Random
 import Array
 import Config
+import Models.Direction exposing (Direction(..))
 
 
 type alias Coordinate =
     List Int
-
-
-type Direction
-    = Up
-    | Right
-    | Down
-    | Left
 
 
 randomCoordinateOffset : Int -> Random.Generator Coordinate
@@ -33,26 +27,6 @@ randomCoordinateOffset offset =
 randomCoordinate : Random.Generator Coordinate
 randomCoordinate =
     randomCoordinateOffset 0
-
-
-randomDirection : Random.Generator Direction
-randomDirection =
-    Random.map
-        (\n ->
-            case n of
-                0 ->
-                    Up
-
-                1 ->
-                    Right
-
-                2 ->
-                    Down
-
-                _ ->
-                    Left
-        )
-        (Random.int 0 3)
 
 
 coordinateUp : Coordinate -> Coordinate
