@@ -1,6 +1,7 @@
 module Config exposing (..)
 
-import Array
+import Array exposing (Array)
+import Time exposing (Time)
 
 
 xSize : Int
@@ -18,7 +19,7 @@ dimensions =
     2
 
 
-boundsArray : Array.Array Int
+boundsArray : Array Int
 boundsArray =
     Array.fromList [ xSize, ySize ]
 
@@ -26,3 +27,8 @@ boundsArray =
 initialSnakeLength : Int
 initialSnakeLength =
     2
+
+
+timeInterval : Time
+timeInterval =
+    500
