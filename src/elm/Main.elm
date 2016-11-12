@@ -3,7 +3,7 @@ module Main exposing (..)
 import Html.App as App
 import Components.View exposing (view)
 import Models.Store exposing (appStoreInit)
-import Subscriptions exposing (subscriptions)
+import Subscriptions.Subscriptions exposing (subscriptions)
 import Reducers.Update exposing (update)
 
 

@@ -1,4 +1,4 @@
-module Subscriptions exposing (subscriptions)
+module Subscriptions.Subscriptions exposing (subscriptions)
 
 import Char
 import Keyboard
@@ -9,7 +9,7 @@ import Config
 import Models.GameState exposing (GameState(StateGameStarted))
 import Models.Direction exposing (Direction(..))
 import Models.Store exposing (Store)
-import Port exposing (swipePort)
+import Subscriptions.SwipeSubscription exposing (swipeSubscription)
 
 
 subscriptions : Store -> Sub Message
@@ -48,20 +48,3 @@ timeStepSubscription gameState =
 
         _ ->
             Sub.none
-
-
-swipeSubscription : Sub Message
-swipeSubscription =
-    swipePort receiveSwipeString
-
-
-receiveSwipeString : String -> Message
-receiveSwipeString received =
-    if received == "up" then
-        NewDirection Up
-    else if received == "right" then
-        NewDirection Right
-    else if received == "down" then
-        NewDirection Down
-    else
-        NewDirection Left
