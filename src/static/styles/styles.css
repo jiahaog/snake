@@ -4,6 +4,14 @@ body {
   font-family: Lato, Avenir, "Avenir Next", "Helvetica Neue", "Segoe UI", Verdana, sans-serif;
 }
 
+/*prevent scrolling because it messes up the controls on mobile*/
+html, body {
+  overflow-x: hidden;
+}
+body {
+  position: relative
+}
+
 @media only screen and (min-width: 768px) {
   .github-corner svg {
     width: 80px;
