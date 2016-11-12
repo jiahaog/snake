@@ -25,13 +25,13 @@ keyboardSubscription =
         (\keyCode ->
             if Char.fromCode keyCode == ' ' then
                 TimeStep
-            else if keyCode == 37 then
+            else if keyCode == 37 || keyCode == Char.toCode 'H' then
                 NewDirection Left
-            else if keyCode == 38 then
+            else if keyCode == 38 || keyCode == Char.toCode 'K' then
                 NewDirection Up
-            else if keyCode == 39 then
+            else if keyCode == 39 || keyCode == Char.toCode 'L' then
                 NewDirection Right
-            else if keyCode == 40 then
+            else if keyCode == 40 || keyCode == Char.toCode 'J' then
                 NewDirection Down
             else
                 Default
