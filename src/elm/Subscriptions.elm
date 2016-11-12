@@ -9,6 +9,7 @@ import Config
 import Models.GameState exposing (GameState(StateGameStarted))
 import Models.Direction exposing (Direction(..))
 import Models.Store exposing (Store)
+import Port exposing (swipePort)
 
 
 subscriptions : Store -> Sub Message
@@ -16,6 +17,7 @@ subscriptions model =
     Platform.Sub.batch
         [ timeStepSubscription model.gameState
         , keyboardSubscription
+        , swipeSubscription
         ]
 
 
@@ -46,3 +48,20 @@ timeStepSubscription gameState =
 
         _ ->
             Sub.none
+
+
+swipeSubscription : Sub Message
+swipeSubscription =
+    swipePort receiveSwipeString
+
+
+receiveSwipeString : String -> Message
+receiveSwipeString received =
+    if received == "up" then
+        NewDirection Up
+    else if received == "right" then
+        NewDirection Right
+    else if received == "down" then
+        NewDirection Down
+    else
+        NewDirection Left

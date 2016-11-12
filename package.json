@@ -25,7 +25,9 @@
     "start": "webpack-dev-server --inline --hot",
     "deploy": "gh-pages-deploy"
   },
-  "dependencies": {},
+  "dependencies": {
+    "zingtouch": "^1.0.3"
+  },
   "repository": {
     "url": "git@github.com:jiahaog/elm-snake.git",
     "type": "git"
@@ -35,8 +37,7 @@
     "prep": [
       "build"
     ],
-    "post": [
-    ],
+    "post": [],
     "noprompt": false
   }
 }

@@ -3628,3 +3628,7 @@ yargs@~3.10.0:
     decamelize "^1.0.0"
     window-size "0.1.0"
 
+zingtouch:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/zingtouch/-/zingtouch-1.0.3.tgz#7ebd8065dfdadf2a65fc321e7ff83a97f4bbcf5d"
+
