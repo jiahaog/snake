@@ -20,10 +20,10 @@ update message store =
         NewGame ->
             ( { initialStore | gameState = StateGameStarted }, generateSnake )
 
-        GenerateSnake ( coordinate, direction ) ->
+        GenerateSnake coordinate ->
             let
                 snake =
-                    newSnake coordinate direction
+                    newSnake coordinate
             in
                 ( { store | snake = Just snake, grid = updateGridSnake snake store.grid }, generateFood )
 

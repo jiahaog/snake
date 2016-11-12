@@ -1,7 +1,7 @@
 module Models.Snake exposing (Snake, newSnake, moveSnake, coordinateOverlapsSnake)
 
 import Set
-import Models.Direction exposing (Direction)
+import Models.Direction exposing (Direction(Right))
 import Models.Food exposing (Food)
 import Models.Geometry exposing (Coordinate, coordinateOffset, randomCoordinateOffset, maybeWrapAroundOutsideCoordinate)
 import Actions.GenerateFood exposing (generateFood)
@@ -12,9 +12,9 @@ type alias Snake =
     List Coordinate
 
 
-newSnake : Coordinate -> Direction -> Snake
-newSnake head direction =
-    growSnake direction [ head ]
+newSnake : Coordinate -> Snake
+newSnake head =
+    growSnake Right [ head ]
 
 
 getSnakeHead : Snake -> Coordinate
