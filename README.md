@@ -2,6 +2,8 @@
 
 Bleeding edge Web Development with [Elm](http://elm-lang.org/) + Webpack 2 (hot reload yay!) + Yarn, to build a Snake game.
 
+![screenshot](./doc/screenshot.png)
+
 ## Dependencies
 
 - [Node.js](https://nodejs.org)
