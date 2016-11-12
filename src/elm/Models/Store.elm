@@ -21,15 +21,15 @@ type alias Store =
 
 
 createRows : Int -> List GridObject
-createRows columns =
+createRows xSize =
     1
-        |> List.repeat columns
+        |> List.repeat xSize
         |> List.map (\n -> Empty)
 
 
 createGrid : Int -> Int -> List (List GridObject)
-createGrid rows columns =
-    List.map (\n -> createRows columns) [1..rows]
+createGrid xSize ySize =
+    List.map (\n -> createRows xSize) [1..ySize]
 
 
 initialStore : Store

@@ -10,18 +10,19 @@ type alias Coordinate =
     List Int
 
 
+randomXCoordinate : Int -> Random.Generator Int
+randomXCoordinate offset =
+    (Random.int offset (Config.xSize - 1 - offset))
+
+
+randomYCoordinate : Int -> Random.Generator Int
+randomYCoordinate offset =
+    (Random.int offset (Config.ySize - 1 - offset))
+
+
 randomCoordinateOffset : Int -> Random.Generator Coordinate
 randomCoordinateOffset offset =
-    (Config.xSize
-        -- first subtract 1 because Random.int is inclusive
-        -
-            1
-        -- Then subtract the offset
-        -
-            offset
-    )
-        |> Random.int offset
-        |> Random.list Config.dimensions
+    Random.map2 (\intA intB -> [ intA, intB ]) (randomXCoordinate offset) (randomYCoordinate offset)
 
 
 randomCoordinate : Random.Generator Coordinate
