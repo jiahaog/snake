@@ -11,6 +11,7 @@
     "elm": "^0.17.1",
     "elm-hot-loader": "^0.3.4",
     "elm-webpack-loader": "^3.0.6",
+    "gh-pages-deploy": "^0.4.2",
     "html-webpack-plugin": "^2.24.1",
     "normalize.css": "^5.0.0",
     "rimraf": "^2.5.4",
@@ -21,11 +22,21 @@
   "scripts": {
     "clean": "rimraf dist",
     "build": "webpack -p",
-    "start": "webpack-dev-server --inline --hot"
+    "start": "webpack-dev-server --inline --hot",
+    "deploy": "gh-pages-deploy"
   },
   "dependencies": {},
   "repository": {
     "url": "git@github.com:jiahaog/elm-snake.git",
     "type": "git"
+  },
+  "gh-pages-deploy": {
+    "staticpath": "dist",
+    "prep": [
+      "build"
+    ],
+    "post": [
+    ],
+    "noprompt": false
   }
 }
