@@ -1,4 +1,4 @@
-module Models.Grid exposing (Grid, GridObject(..), updateGrid, updateGridFood, updateGridSnake)
+module Models.Grid exposing (Grid, GridObject(..), createGrid, updateGrid, updateGridFood, updateGridSnake)
 
 import Set exposing (Set)
 import Models.Food exposing (Food)
@@ -14,6 +14,18 @@ type GridObject
     = Empty
     | SnakeCell
     | FoodCell
+
+
+createRows : Int -> List GridObject
+createRows xSize =
+    1
+        |> List.repeat xSize
+        |> List.map (\n -> Empty)
+
+
+createGrid : Int -> Int -> List (List GridObject)
+createGrid xSize ySize =
+    List.map (\n -> createRows xSize) [1..ySize]
 
 
 updateGridFromSet : Grid -> Set Coordinate -> GridObject -> Grid
