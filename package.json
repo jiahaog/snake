@@ -1,7 +1,7 @@
 {
-  "name": "elm-snake",
+  "name": "snake",
   "version": "1.0.0",
-  "description": "Snake in Elm",
+  "description": "Snake built with Elm",
   "main": "src/static/index.js",
   "author": "Goh Jia Hao <jiahaog@gmail.com>",
   "private": true,
@@ -32,7 +32,7 @@
     "zingtouch": "^1.0.3"
   },
   "repository": {
-    "url": "git@github.com:jiahaog/elm-snake.git",
+    "url": "git@github.com:jiahaog/snake.git",
     "type": "git"
   },
   "gh-pages-deploy": {

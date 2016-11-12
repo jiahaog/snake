@@ -1,7 +1,7 @@
 {
     "version": "1.0.0",
     "summary": "Snake in Elm",
-    "repository": "https://github.com/jiahaog/elm-snake.git",
+    "repository": "https://github.com/jiahaog/snake.git",
     "license": "MIT",
     "source-directories": [
         "src/elm"
