@@ -4,6 +4,13 @@ body {
   font-family: Lato, Avenir, "Avenir Next", "Helvetica Neue", "Segoe UI", Verdana, sans-serif;
 }
 
+@media only screen and (min-width: 768px) {
+  .github-corner svg {
+    width: 80px;
+    height: 80px ;
+  }
+}
+
 .title {
   text-align: center;
   margin: 0.3em 0;

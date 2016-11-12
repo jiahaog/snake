@@ -11,7 +11,7 @@ xSize =
 
 ySize : Int
 ySize =
-    24
+    22
 
 
 boundsArray : Array Int
