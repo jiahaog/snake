@@ -19,7 +19,7 @@ function inRange(number, lowerBound, upperBound) {
   return number >= lowerBound && number < upperBound;
 }
 
-var zt = new ZingTouch.Region(document.body);
+var zt = new ZingTouch.Region(document.body, false, false);
 zt.bind(container, 'swipe', function(event){
   // offset by 45 so we just deal with multiples of 90
   var angle = (event.detail.data[0].currentDirection + 45) % 360;
