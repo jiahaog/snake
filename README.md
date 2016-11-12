@@ -1,8 +1,12 @@
-# Elm Snake
+# Snake
 
-Bleeding edge Web Development with [Elm](http://elm-lang.org/) + Webpack 2 (hot reload yay!) + Yarn, to build a Snake game.
+Experimenting with [Elm](http://elm-lang.org/) (so much awesome) to build a Snake game while trying to keep the source code structured.
 
-![screenshot](./doc/screenshot.png)
+Also with Webpack 2 + hot reload + Yarn so now I have my own bleeding edge boilerplate for web development.
+
+[Play it here!](https://jiahaog.github.com/snake)
+
+[![screenshot](./doc/screenshot.png)](https://jiahaog.github.com/snake)
 
 ## Dependencies
 
@@ -10,12 +14,13 @@ Bleeding edge Web Development with [Elm](http://elm-lang.org/) + Webpack 2 (hot 
 - [Yarn](https://yarnpkg.com/)
 
 ## Setup
+
 First intall the dependencies with Yarn (trust me, it's much faster).
 ```bash
 yarn install
 ```
 
-You can still use npm though
+You can still use npm though...
 
 ```bash
 npm install
@@ -29,7 +34,7 @@ npm install
 npm start
 ```
 
-The app is now visible at [http://127.0.0.1:8080/](http://127.0.0.1:8080/).
+View the page for development at [http://127.0.0.1:8080/](http://127.0.0.1:8080/).
 
 ### Build
 
