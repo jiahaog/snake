@@ -47,8 +47,16 @@ body {
 
 .grid-cell {
   display: flex;
-  width: 30px;
-  height: 30px;
+  /*Slightly smaller than 100/16 */
+  width: 6.23vw;
+  height: 6.23vw;
+}
+
+@media only screen and (min-width: 768px) {
+  .grid-cell {
+    width: 30px;
+    height: 30px;
+  }
 }
 
 .cell-empty {
