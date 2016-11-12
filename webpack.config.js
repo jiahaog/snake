@@ -22,6 +22,10 @@ module.exports = {
     noParse: /\.elm$/,
     rules : [
       {
+        test: /\.js$/,
+        use: ['babel-loader']
+      },
+      {
         test: /\.elm$/,
         use: ['elm-hot', 'elm-webpack'],
       },

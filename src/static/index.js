@@ -1,30 +1,31 @@
-require('./../../node_modules/normalize.css/normalize.css')
-require('./styles/styles.css');
+import './../../node_modules/normalize.css/normalize.css'
+import './styles/styles.css';
 
-var Elm = require('./../elm/Main.elm');
-var ZingTouch = require('zingtouch');
+import Elm from './../elm/Main.elm';
+import ZingTouch from 'zingtouch';
 
-var DIRECTIONS = {
+const DIRECTIONS = {
   up: 'up',
   right: 'right',
   down: 'down',
   left: 'left'
 }
 
-var container = document.getElementById('main');
+const container = document.getElementById('main');
 
-var app = Elm.Main.embed(container);
+const app = Elm.Main.embed(container);
 
-function inRange(number, lowerBound, upperBound) {
+const inRange = (number, lowerBound, upperBound) => {
   return number >= lowerBound && number < upperBound;
-}
+};
 
-var zt = new ZingTouch.Region(document.body, false, false);
-zt.bind(container, 'swipe', function(event){
+const touchRegion = new ZingTouch.Region(document.body, false, false);
+
+touchRegion.bind(container, 'swipe', (event) => {
   // offset by 45 so we just deal with multiples of 90
-  var angle = (event.detail.data[0].currentDirection + 45) % 360;
+  const angle = (event.detail.data[0].currentDirection + 45) % 360;
 
-  var swipeDirection;
+  let swipeDirection;
 
   if (inRange(angle, 0, 90)) {
     swipeDirection = DIRECTIONS.right;
