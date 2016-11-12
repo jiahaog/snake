@@ -1,7 +1,7 @@
 {
   "name": "snake",
   "version": "1.0.0",
-  "description": "Snake built with Elm",
+  "description": "Snake, built with Elm",
   "main": "src/static/index.js",
   "author": "Goh Jia Hao <jiahaog@gmail.com>",
   "private": true,
