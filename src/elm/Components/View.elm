@@ -1,27 +1,40 @@
 module Components.View exposing (..)
 
-import Html exposing (Html, div, span, button, text, input, select, option, Attribute)
-import Html.Attributes exposing (value, classList)
+import Html exposing (Html, h1, div, span, a, button, text, input, select, option, Attribute)
+import Html.Attributes exposing (class, value, classList, attribute)
 import Html.Events exposing (onClick, onInput, on, keyCode)
-import Actions.Message exposing (Message(..))
-import Components.Debugger exposing (debuggerView)
+import Models.GameState exposing (GameState(StateGameOver))
+import Actions.Message exposing (Message(NewGame))
 import Models.Grid exposing (Grid, GridObject(..))
 import Models.Store exposing (Store)
 
 
 view : Store -> Html Message
 view model =
-    div []
-        [ text "Elm Snake"
-        , div [ classList [ ( "grid-container", True ) ] ] [ renderGrid model.grid ]
-        , renderButtons
-        , debuggerView model
+    div [ class "wrapper" ]
+        [ renderHeader
+        , div [ classList [ ( "grid-container", True ) ] ] [ renderGrid model ]
+        , renderFooter
         ]
 
 
-renderGrid : Grid -> Html Message
-renderGrid grid =
-    div [ classList [ ( "grid", True ) ] ] (List.map renderRow grid)
+renderHeader : Html Message
+renderHeader =
+    div []
+        [ h1 [ class "title" ] [ text "Snake" ]
+        ]
+
+
+renderFooter : Html Message
+renderFooter =
+    div []
+        [ div [ class "footer" ] [ text "Built with ", a [ attribute "href" "http://elm-lang.org/" ] [ text "Elm" ] ]
+        ]
+
+
+renderGrid : Store -> Html Message
+renderGrid model =
+    div [ classList [ ( "grid", True ), ( "game-over-overlay", model.gameState == StateGameOver ) ], onClick NewGame ] (List.append (List.map renderRow model.grid) [ renderScore model.score ])
 
 
 renderRow : List GridObject -> Html Message
@@ -34,6 +47,14 @@ renderCell gridObject =
     span [ classList [ ( "grid-cell", True ), ( gridCellClass gridObject, True ) ] ] []
 
 
+renderScore : Int -> Html Message
+renderScore score =
+    if score < 0 then
+        div [] []
+    else
+        div [ class "score" ] [ text (toString score) ]
+
+
 gridCellClass : GridObject -> String
 gridCellClass gridObject =
     case gridObject of
@@ -41,15 +62,7 @@ gridCellClass gridObject =
             "cell-empty"
 
         SnakeCell ->
-            "cell-snake"
+            "cell-snake bg-blue"
 
         FoodCell ->
-            "cell-food"
-
-
-renderButtons : Html Message
-renderButtons =
-    div []
-        [ button [ onClick NewGame ] [ text "New Game" ]
-        , button [ onClick (TimeStep) ] [ text "TimeStep" ]
-        ]
+            "cell-food bg-light-red"

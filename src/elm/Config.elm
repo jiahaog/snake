@@ -6,17 +6,12 @@ import Time exposing (Time)
 
 xSize : Int
 xSize =
-    10
+    16
 
 
 ySize : Int
 ySize =
-    10
-
-
-dimensions : Int
-dimensions =
-    2
+    24
 
 
 boundsArray : Array Int
@@ -31,4 +26,4 @@ initialSnakeLength =
 
 timeInterval : Time
 timeInterval =
-    200
+    100
