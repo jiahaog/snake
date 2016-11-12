@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Lato:300,400');
+@import url('https://fonts.googleapis.com/css?family=Lato:300');
 
 body {
   font-family: Lato, Avenir, "Avenir Next", "Helvetica Neue", "Segoe UI", Verdana, sans-serif;
@@ -6,16 +6,25 @@ body {
 
 .title {
   text-align: center;
+  margin: 0.3em 0;
+  opacity: 0.7;
+}
+
+@media only screen and (min-width: 768px) {
+  .title {
+    margin: 0.67em 0;
+  }
 }
 
 .wrapper {
   margin: 0 auto;
   max-width: 960px;
-
 }
 
 @media only screen and (min-width: 768px) {
-  padding: 4.8rem 2rem;
+  .wrapper {
+    padding: 4.8rem 2rem;
+  }
 }
 
 .score {
