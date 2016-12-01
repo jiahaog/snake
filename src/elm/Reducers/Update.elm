@@ -28,7 +28,8 @@ update message store =
                 ( { store | snake = Just snake, grid = updateGridSnake snake store.grid }, generateFood )
 
         GenerateFood food ->
-            snakeExists store
+            snakeExists
+                store
                 (\store snake ->
                     if coordinateOverlapsSnake snake food then
                         ( store, generateFood )
@@ -36,14 +37,20 @@ update message store =
                         ( { store | food = Just food, grid = updateGridFood food store.grid, score = store.score + 1 }, Cmd.none )
                 )
 
+        StartGenerateFood ->
+            ( { store | snake = store.snake }, generateFood )
+
         TimeStep ->
             snakeAndFoodExists store
                 (\store snake food ->
                     let
-                        ( snake, cmd ) =
+                        ( newSnake, message ) =
                             moveSnake store.currentDirection food snake
+
+                        ( newStore, cmd ) =
+                            update message store
                     in
-                        ( { store | snake = Just snake, grid = updateGrid snake food store.grid, lastMovedDirection = store.currentDirection }, cmd )
+                        ( { newStore | snake = Just newSnake, grid = updateGrid newSnake food newStore.grid, lastMovedDirection = newStore.currentDirection }, cmd )
                 )
 
         NewDirection direction ->

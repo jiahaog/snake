@@ -25,7 +25,7 @@ createRows xSize =
 
 createGrid : Int -> Int -> List (List GridObject)
 createGrid xSize ySize =
-    List.map (\n -> createRows xSize) [1..ySize]
+    List.map (\n -> createRows xSize) (List.range 1 ySize)
 
 
 updateGridFromSet : Grid -> Set Coordinate -> GridObject -> Grid

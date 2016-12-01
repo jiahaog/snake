@@ -4,8 +4,7 @@ import Set
 import Models.Direction exposing (Direction(Right))
 import Models.Food exposing (Food)
 import Models.Geometry exposing (Coordinate, coordinateOffset, randomCoordinateOffset, maybeWrapAroundOutsideCoordinate)
-import Actions.GenerateFood exposing (generateFood)
-import Actions.Message exposing (Message(GameOver), messageToCmd)
+import Actions.Message exposing (Message(Default, GameOver, StartGenerateFood))
 
 
 type alias Snake =
@@ -48,17 +47,17 @@ removeSnakeTail snake =
         |> List.reverse
 
 
-moveSnake : Direction -> Food -> Snake -> ( Snake, Cmd Message )
+moveSnake : Direction -> Food -> Snake -> ( Snake, Message )
 moveSnake direction food snake =
     snake
         |> growSnake direction
         |> (\snake ->
                 if snakeHeadOnSelf snake then
-                    ( snake, messageToCmd GameOver )
+                    ( snake, GameOver )
                 else if snakeHeadOnFood food snake then
-                    ( snake, generateFood )
+                    ( snake, StartGenerateFood )
                 else
-                    ( removeSnakeTail snake, Cmd.none )
+                    ( removeSnakeTail snake, Default )
            )
 
 
